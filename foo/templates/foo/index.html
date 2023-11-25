@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <style>
+            img
+            {
+                width: 300px;
+                height: 500px;
+            }
+
+            ul{
+                margin: 15px;
+                padding: 10px;
+                list-style-type: none;
+                overflow: hidden;
+                border: thin;
+            }
+
+            li
+            {
+                text-decoration: none;
+                padding: 15px;
+                float: left;
+
+            }
+
+            form
+            {
+                display: none;
+                padding: 0;
+                z-index: 1;
+            }
+
+            li:hover form
+            {
+                float: left;
+                display: block;
+            }
+
+            
+
+            
+        </style>
+            
+        <script>
+            document.addEventListener("DOMContentLoaded", function(){
+                let count = 0;
+                document.querySelectorAll('button').forEach(function(button){
+                    button.onclick = function(){
+                        document.querySelector('#demo').innerHTML = button.dataset.word;
+                    }
+                });
+
+            });
+            
+        </script>
+
+    </head>
+    <body>
+        <div>
+            {% for img in images %}
+                <img src="{{img.image}}">
+                <p id="demo"></p>
+                <ul>
+                    <li>&#128077
+                        <div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="like" value="like">
+                            <button data-word="&#128077" id="like" type="submit">&#128077</button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="like" value="love">
+                            <button data-word="&#128159" id="love" type="submit">&#128159</button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="like" value="laugh">
+                            <button data-word="&#128514" id="laugh" type="submit">&#128514</button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="like" value="sad">
+                            <button data-word="&#128532" id="sad" type="submit">&#128532</button>
+                        </form>
+                    </div>
+                    </li>
+                </ul>
+                     
+            {% endfor %}
+            </div>
+
+    </body>
+</html>
